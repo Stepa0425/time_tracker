@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Business Calculator",
+    "description": "App for calculating income"
+  },
+  {
+    "id": 2,
+    "name": "Restaurant Application",
+    "description": "Restaurant Management Application"
+  },
+  {
+    "id": 3,
+    "name": "Banking Application",
+    "description": "M-Banking for Belgazprombank"
+  }
+]
