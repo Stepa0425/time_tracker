@@ -12,7 +12,7 @@
 	<artifactId>tracker</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>time.tracker</name>
-	<description>RESTful API </description>
+	<description>RESTful API time-tracker app </description>
 	<url/>
 	<licenses>
 		<license/>
