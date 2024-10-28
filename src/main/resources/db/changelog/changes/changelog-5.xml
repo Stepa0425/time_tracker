@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "StepanKarapetyan" id = "7">
+        <sql>
+            INSERT INTO tasks (title, description, project_id)
+            VALUES ('Creating registration module', 'Create registration module in banking app', 3),
+            ('Fixing bags M-Banking', 'Fix bags in payment module', 3),
+            ('Add new feature', 'Add new feature for shows menu', 2);
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

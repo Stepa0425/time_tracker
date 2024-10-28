@@ -1,0 +1,9 @@
+{
+  "title": "Junior next task",
+  "description": "Realize serialization simple example",
+  "project": {
+    "id": 1,
+    "name": "Business Calculator",
+    "description": "App for calculating income"
+  }
+}

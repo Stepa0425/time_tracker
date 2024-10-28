@@ -14,10 +14,11 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class EmployeeServiceImpl implements EmployeeService{
+class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
     private final EmployeeRepository employeeRepository;
+
     @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
@@ -25,12 +26,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee createEmployee(Employee employee) {
-        validateEmployeeEmail(employee.getEmail());
+        findEmployeeWithEmail(employee.getEmail());
         employee.setPasswordHash(hashPassword(employee.getPasswordHash()));
         return employeeRepository.save(employee);
     }
 
-    private void validateEmployeeEmail(String email) {
+    private void findEmployeeWithEmail(String email) {
         employeeRepository.findByEmail(email)
                 .ifPresent(existingEmployee -> {
                     throw new EmployeeAlreadyExistsException(email);
@@ -48,7 +49,7 @@ public class EmployeeServiceImpl implements EmployeeService{
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee isn't exists with id:" + employeeId));
 
-        validateEmployeeEmail(employee.getEmail());
+        findEmployeeWithEmail(employee.getEmail());
         findEmployee.setPasswordHash(hashPassword(employee.getPasswordHash()));
         findEmployee.setUsername(employee.getUsername());
         findEmployee.setEmail((employee.getEmail()));
@@ -65,6 +66,4 @@ public class EmployeeServiceImpl implements EmployeeService{
 
         employeeRepository.deleteById(employeeId);
     }
-
-
 }

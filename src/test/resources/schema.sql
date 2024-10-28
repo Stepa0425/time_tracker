@@ -12,3 +12,14 @@ CREATE TABLE IF NOT EXISTS employees (
     password_hash VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
 );
+
+CREATE TABLE IF NOT EXISTS tasks(
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    title VARCHAR(50) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    project_id BIGINT NOT NULL,
+    PRIMARY KEY(id)
+);
+
+ALTER TABLE tasks
+ADD FOREIGN KEY (project_id) REFERENCES projects(id);

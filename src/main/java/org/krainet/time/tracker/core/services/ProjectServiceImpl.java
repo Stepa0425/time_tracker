@@ -12,10 +12,11 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor(access = AccessLevel.PACKAGE)
-public class ProjectServiceImpl implements ProjectService{
+class ProjectServiceImpl implements ProjectService {
 
     @Autowired
     private final ProjectRepository projectRepository;
+
     @Override
     public List<Project> getAllProjects() {
         return projectRepository.findAll();
@@ -34,19 +35,18 @@ public class ProjectServiceImpl implements ProjectService{
 
         findProject.setName(project.getName());
         findProject.setDescription((project.getDescription()));
+        findProject.setTasks(project.getTasks());
 
         return projectRepository.save(findProject);
 
     }
 
     @Override
-    public void deleteProject(Long projectId){
+    public void deleteProject(Long projectId) {
         projectRepository.findById(projectId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Project isn't exists with id:" + projectId));
 
         projectRepository.deleteById(projectId);
     }
-
-
 }

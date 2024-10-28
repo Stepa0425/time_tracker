@@ -22,13 +22,15 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ProjectServiceImplTest {
+
     @InjectMocks
     private ProjectServiceImpl projectService;
+
     @Mock
     private ProjectRepository projectRepository;
 
     @Test
-    public void shouldReturnAllProjects(){
+    public void shouldReturnAllProjects() {
         var project = mock(Project.class);
         when(projectRepository.findAll()).thenReturn(List.of(project));
 
@@ -37,11 +39,11 @@ public class ProjectServiceImplTest {
     }
 
     @Test
-    public void shouldReturnSavedProject(){
+    public void shouldReturnSavedProject() {
         var project = mock(Project.class);
         when(project.getName()).thenReturn("Medicine app");
         when(project.getDescription()).thenReturn("Medicine app for cardiology");
-        when(projectRepository.save(project)).thenReturn(new Project(1L,"Medicine app","Medicine app for cardiology"));
+        when(projectRepository.save(project)).thenReturn(project);
 
         Project savedProject = projectService.createProject(project);
         assertEquals(savedProject.getName(), project.getName());
@@ -49,15 +51,15 @@ public class ProjectServiceImplTest {
     }
 
     @Test
-    public void shouldReturnUpdatedProject(){
+    public void shouldReturnUpdatedProject() {
         var changedProject = mock(Project.class);
         when(changedProject.getName()).thenReturn("Medicine app");
         when(changedProject.getDescription()).thenReturn("Medicine app for cardiology");
-        
+
         var foundProject = mock(Project.class);
         when(foundProject.getName()).thenReturn("Med App");
         when(foundProject.getDescription()).thenReturn("Medicine app cardiology");
-        
+
         when(projectRepository.findById(1L)).thenReturn(Optional.of(foundProject));
         when(projectRepository.save(foundProject)).thenReturn(changedProject);
 
@@ -67,7 +69,7 @@ public class ProjectServiceImplTest {
     }
 
     @Test
-    public void shouldReturnExceptionWhenTryUpdateNotExistsProject(){
+    public void shouldReturnExceptionWhenTryUpdateNotExistsProject() {
         var foundProject = mock(Project.class);
         when(projectRepository.findById(1L)).thenReturn(Optional.empty());
 
@@ -78,15 +80,13 @@ public class ProjectServiceImplTest {
     }
 
     @Test
-    public void shouldDeleteProject(){
+    public void shouldDeleteProject() {
         projectRepository.deleteById(1L);
         verify(projectRepository, times(1)).deleteById(1L);
     }
 
-
-
     @Test
-    public void shouldReturnExceptionWhenTryDeleteNotExistsProject(){
+    public void shouldReturnExceptionWhenTryDeleteNotExistsProject() {
         when(projectRepository.findById(1L)).thenReturn(Optional.empty());
 
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class,
@@ -94,5 +94,4 @@ public class ProjectServiceImplTest {
 
         assertEquals(exception.getMessage(), "Project isn't exists with id:1");
     }
-
 }

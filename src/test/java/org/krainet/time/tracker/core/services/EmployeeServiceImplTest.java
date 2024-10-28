@@ -23,13 +23,15 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class EmployeeServiceImplTest {
+
     @InjectMocks
     private EmployeeServiceImpl employeeService;
+
     @Mock
     private EmployeeRepository employeeRepository;
 
     @Test
-    public void shouldReturnAllEmployees(){
+    public void shouldReturnAllEmployees() {
         var employee = mock(Employee.class);
         when(employeeRepository.findAll()).thenReturn(List.of(employee));
 
@@ -38,11 +40,11 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void shouldReturnSavedEmployee(){
+    public void shouldReturnSavedEmployee() {
         var employee = mock(Employee.class);
         when(employee.getUsername()).thenReturn("Martin");
         when(employee.getEmail()).thenReturn("martinov@gmail.com");
-        when(employeeRepository.save(employee)).thenReturn(new Employee(1L, "Martin","martinov@gmail.com", "somehash"));
+        when(employeeRepository.save(employee)).thenReturn(new Employee(1L, "Martin", "martinov@gmail.com", "somehash"));
 
         Employee savedEmployee = employeeService.createEmployee(employee);
         assertEquals(savedEmployee.getUsername(), employee.getUsername());
@@ -50,10 +52,10 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void shouldReturnExceptionWhenCreateEmployeeWithEmailExists(){
+    public void shouldReturnExceptionWhenCreateEmployeeWithEmailExists() {
         var employee = mock(Employee.class);
         when(employee.getEmail()).thenReturn("martinov@gmail.com");
-        when(employeeRepository.findByEmail(employee.getEmail())).thenReturn(Optional.of(new Employee(1L, "Martin","martinov@gmail.com", "somehash")));
+        when(employeeRepository.findByEmail(employee.getEmail())).thenReturn(Optional.of(new Employee(1L, "Martin", "martinov@gmail.com", "somehash")));
 
         EmployeeAlreadyExistsException exception = assertThrows(EmployeeAlreadyExistsException.class,
                 () -> employeeService.createEmployee(employee));
@@ -61,15 +63,15 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void shouldReturnUpdatedEmployee(){
+    public void shouldReturnUpdatedEmployee() {
         var changedEmployee = mock(Employee.class);
         when(changedEmployee.getUsername()).thenReturn("Martin");
         when(changedEmployee.getEmail()).thenReturn("martinov@gmail.com");
-        
+
         var foundEmployee = mock(Employee.class);
         when(foundEmployee.getUsername()).thenReturn("Martin1024");
         when(foundEmployee.getEmail()).thenReturn("martinov1024@gmail.com");
-        
+
         when(employeeRepository.findById(1L)).thenReturn(Optional.of(foundEmployee));
         when(employeeRepository.save(foundEmployee)).thenReturn(changedEmployee);
 
@@ -79,7 +81,7 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void shouldReturnExceptionWhenTryUpdateNotExistsEmployee(){
+    public void shouldReturnExceptionWhenTryUpdateNotExistsEmployee() {
         var foundEmployee = mock(Employee.class);
         when(employeeRepository.findById(1L)).thenReturn(Optional.empty());
 
@@ -88,6 +90,7 @@ public class EmployeeServiceImplTest {
 
         assertEquals(exception.getMessage(), "Employee isn't exists with id:1");
     }
+
     @Test
     public void shouldThrowExceptionWhenUpdatingEmployeeWithExistingEmail() {
         Long employeeId = 1L;
@@ -104,15 +107,13 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
-    public void shouldDeleteEmployee(){
+    public void shouldDeleteEmployee() {
         employeeRepository.deleteById(1L);
         verify(employeeRepository, times(1)).deleteById(1L);
     }
 
-
-
     @Test
-    public void shouldReturnExceptionWhenTryDeleteNotExistsEmployee(){
+    public void shouldReturnExceptionWhenTryDeleteNotExistsEmployee() {
         when(employeeRepository.findById(1L)).thenReturn(Optional.empty());
 
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class,
