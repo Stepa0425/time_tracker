@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+
+    <changeSet author = "StepanKarapetyan" id = "2">
+        <sql>
+            INSERT INTO projects(name, description)
+            VALUES ('Business Calculator', 'App for calculating income'),
+            ('Restaurant Application', 'Restaurant Management Application'),
+            ('Banking Application','M-Banking for Belgazprombank');
+        </sql>
+    </changeSet>
+
+</databaseChangeLog>

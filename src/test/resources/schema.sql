@@ -5,3 +5,10 @@ CREATE TABLE IF NOT EXISTS projects (
   PRIMARY KEY (id)
 );
 
+CREATE TABLE IF NOT EXISTS employees (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL unique,
+    password_hash VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id)
+);

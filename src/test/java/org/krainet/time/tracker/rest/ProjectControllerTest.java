@@ -49,7 +49,7 @@ public class ProjectControllerTest {
                 .andReturn();
 
         String responseBodyContent = mvcResult.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/test_case_1/response.json");
+        String jsonResponse = jsonFileReader.readJsonFromFile("rest/project_controller/test_case_1/response.json");
 
         assertJson(responseBodyContent)
                 .where()
@@ -63,7 +63,7 @@ public class ProjectControllerTest {
     @Transactional
     @DisplayName("Test 2: creating new project")
     public void shouldReturnSavedProject() throws Exception {
-        String jsonRequest = jsonFileReader.readJsonFromFile("rest/test_case_2/request.json");
+        String jsonRequest = jsonFileReader.readJsonFromFile("rest/project_controller/test_case_2/request.json");
 
         MvcResult mvcResult = mockMvc.perform(post(BASE_URL + "/projects")
                         .content(jsonRequest)
@@ -72,7 +72,7 @@ public class ProjectControllerTest {
                 .andReturn();
 
         String responseBodyContent = mvcResult.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/test_case_2/response.json");
+        String jsonResponse = jsonFileReader.readJsonFromFile("rest/project_controller/test_case_2/response.json");
 
         assertJson(responseBodyContent)
                 .where()
@@ -85,7 +85,7 @@ public class ProjectControllerTest {
     @Transactional
     @DisplayName("Test 3: updating project")
     public void shouldReturnUpdatedProject() throws Exception {
-        String jsonRequest = jsonFileReader.readJsonFromFile("rest/test_case_3/request.json");
+        String jsonRequest = jsonFileReader.readJsonFromFile("rest/project_controller/test_case_3/request.json");
 
         MvcResult mvcResult = mockMvc.perform(put(BASE_URL + "/projects/3")
                         .content(jsonRequest)
@@ -94,7 +94,7 @@ public class ProjectControllerTest {
                 .andReturn();
 
         String responseBodyContent = mvcResult.getResponse().getContentAsString();
-        String jsonResponse = jsonFileReader.readJsonFromFile("rest/test_case_3/response.json");
+        String jsonResponse = jsonFileReader.readJsonFromFile("rest/project_controller/test_case_3/response.json");
 
         assertJson(responseBodyContent)
                 .where()
