@@ -3,6 +3,7 @@ package org.krainet.time.tracker.core.services;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.krainet.time.tracker.core.domain.Employee;
+import org.krainet.time.tracker.core.exceptions.EmployeeAlreadyExistsException;
 import org.krainet.time.tracker.core.exceptions.ResourceNotFoundException;
 import org.krainet.time.tracker.core.repositories.EmployeeRepository;
 import org.mockito.InjectMocks;
@@ -49,6 +50,17 @@ public class EmployeeServiceImplTest {
     }
 
     @Test
+    public void shouldReturnExceptionWhenCreateEmployeeWithEmailExists(){
+        var employee = mock(Employee.class);
+        when(employee.getEmail()).thenReturn("martinov@gmail.com");
+        when(employeeRepository.findByEmail(employee.getEmail())).thenReturn(Optional.of(new Employee(1L, "Martin","martinov@gmail.com", "somehash")));
+
+        EmployeeAlreadyExistsException exception = assertThrows(EmployeeAlreadyExistsException.class,
+                () -> employeeService.createEmployee(employee));
+        assertEquals(exception.getMessage(), "Employee with email: " + employee.getEmail() + " already exists. Please change the email.");
+    }
+
+    @Test
     public void shouldReturnUpdatedEmployee(){
         var changedEmployee = mock(Employee.class);
         when(changedEmployee.getUsername()).thenReturn("Martin");
@@ -75,6 +87,20 @@ public class EmployeeServiceImplTest {
                 () -> employeeService.updateEmployee(1L, foundEmployee));
 
         assertEquals(exception.getMessage(), "Employee isn't exists with id:1");
+    }
+    @Test
+    public void shouldThrowExceptionWhenUpdatingEmployeeWithExistingEmail() {
+        Long employeeId = 1L;
+        var existingEmployee = new Employee(employeeId, "Martin", "martinov@gmail.com", "somehash");
+        var updatedEmployee = new Employee(null, "Martin", "martinov@gmail.com", "newhash");
+
+        when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(existingEmployee));
+        when(employeeRepository.findByEmail(updatedEmployee.getEmail())).thenReturn(Optional.of(existingEmployee));
+
+        EmployeeAlreadyExistsException exception = assertThrows(EmployeeAlreadyExistsException.class,
+                () -> employeeService.updateEmployee(employeeId, updatedEmployee));
+
+        assertEquals("Employee with email: " + updatedEmployee.getEmail() + " already exists. Please change the email.", exception.getMessage());
     }
 
     @Test

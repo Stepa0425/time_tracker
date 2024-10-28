@@ -3,6 +3,7 @@ package org.krainet.time.tracker.core.services;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import org.krainet.time.tracker.core.domain.Employee;
+import org.krainet.time.tracker.core.exceptions.EmployeeAlreadyExistsException;
 import org.krainet.time.tracker.core.exceptions.ResourceNotFoundException;
 import org.krainet.time.tracker.core.repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +25,31 @@ public class EmployeeServiceImpl implements EmployeeService{
 
     @Override
     public Employee createEmployee(Employee employee) {
-        String hashpw = BCrypt.hashpw(employee.getPasswordHash(), BCrypt.gensalt());
-        employee.setPasswordHash(hashpw);
+        validateEmployeeEmail(employee.getEmail());
+        employee.setPasswordHash(hashPassword(employee.getPasswordHash()));
         return employeeRepository.save(employee);
+    }
+
+    private void validateEmployeeEmail(String email) {
+        employeeRepository.findByEmail(email)
+                .ifPresent(existingEmployee -> {
+                    throw new EmployeeAlreadyExistsException(email);
+                });
+    }
+
+    private String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
     @Override
     public Employee updateEmployee(Long employeeId, Employee employee) {
+
         Employee findEmployee = employeeRepository.findById(employeeId)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee isn't exists with id:" + employeeId));
 
-        String hashpw = BCrypt.hashpw(employee.getPasswordHash(), BCrypt.gensalt());
-
-        findEmployee.setPasswordHash(hashpw);
+        validateEmployeeEmail(employee.getEmail());
+        findEmployee.setPasswordHash(hashPassword(employee.getPasswordHash()));
         findEmployee.setUsername(employee.getUsername());
         findEmployee.setEmail((employee.getEmail()));
 

@@ -6,12 +6,20 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
 
     <changeSet author = "StepanKarapetyan" id = "2">
-        <sql>
-            INSERT INTO projects(name, description)
-            VALUES ('Business Calculator', 'App for calculating income'),
-            ('Restaurant Application', 'Restaurant Management Application'),
-            ('Banking Application','M-Banking for Belgazprombank');
-        </sql>
+        <createTable tableName="employees">
+            <column autoIncrement="true" name="id" type="BIGSERIAL">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(100)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password_hash" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
     </changeSet>
 
 </databaseChangeLog>

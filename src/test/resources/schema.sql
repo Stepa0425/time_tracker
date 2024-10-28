@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS projects (
 CREATE TABLE IF NOT EXISTS employees (
     id BIGINT NOT NULL AUTO_INCREMENT,
     username VARCHAR(50) NOT NULL,
-    email VARCHAR(100) NOT NULL unique,
+    email VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
     PRIMARY KEY(id)
 );
