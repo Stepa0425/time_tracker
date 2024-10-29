@@ -70,8 +70,8 @@ public class EmployeeControllerTest {
             assertEquals(expectedEmployee.get("username").asText(), actualEmployee.get("username").asText());
             assertEquals(expectedEmployee.get("email").asText(), actualEmployee.get("email").asText());
 
-            assertNotNull(actualEmployee.get("passwordHash"));
-            assertTrue(!actualEmployee.get("passwordHash").asText().isEmpty());
+            assertNotNull(actualEmployee.get("password_hash"));
+            assertTrue(!actualEmployee.get("password_hash").asText().isEmpty());
         }
     }
 
@@ -98,8 +98,8 @@ public class EmployeeControllerTest {
         assertEquals(expectedResponseNode.get("username").asText(), actualResponseNode.get("username").asText());
         assertEquals(expectedResponseNode.get("email").asText(), actualResponseNode.get("email").asText());
 
-        assertNotNull(actualResponseNode.get("passwordHash"));
-        assertTrue(!actualResponseNode.get("passwordHash").asText().isEmpty());
+        assertNotNull(actualResponseNode.get("password_hash"));
+        assertTrue(!actualResponseNode.get("password_hash").asText().isEmpty());
     }
 
     @Test
@@ -124,8 +124,8 @@ public class EmployeeControllerTest {
         assertEquals(expectedResponseNode.get("username").asText(), actualResponseNode.get("username").asText());
         assertEquals(expectedResponseNode.get("email").asText(), actualResponseNode.get("email").asText());
 
-        assertNotNull(actualResponseNode.get("passwordHash"));
-        assertTrue(!actualResponseNode.get("passwordHash").asText().isEmpty());
+        assertNotNull(actualResponseNode.get("password_hash"));
+        assertTrue(!actualResponseNode.get("password_hash").asText().isEmpty());
     }
 
     @Test

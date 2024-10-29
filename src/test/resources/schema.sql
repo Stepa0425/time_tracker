@@ -22,4 +22,20 @@ CREATE TABLE IF NOT EXISTS tasks(
 );
 
 ALTER TABLE tasks
-ADD FOREIGN KEY (project_id) REFERENCES projects(id);
+ADD FOREIGN KEY (project_id) REFERENCES projects(id) ON DELETE CASCADE;
+
+CREATE TABLE IF NOT EXISTS time_entries (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    task_id BIGINT NOT NULL,
+    employee_id BIGINT NOT NULL,
+    duration INT DEFAULT 0,
+    start_time TIMESTAMP,
+    end_time TIMESTAMP,
+    PRIMARY KEY(id)
+);
+
+ALTER TABLE time_entries
+ADD FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE;
+
+ALTER TABLE time_entries
+ADD FOREIGN KEY (employee_id) REFERENCES employees(id) ON DELETE CASCADE;

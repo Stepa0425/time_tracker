@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "duration": 0,
+    "task": {
+      "id": 1,
+      "title": "Creating registration module",
+      "description": "Create registration module in banking app",
+      "project": {
+        "id": 3,
+        "name": "Banking Application",
+        "description": "M-Banking for Belgazprombank"
+      }
+    },
+    "employee": {
+      "id": 2,
+      "username": "smirnyaga",
+      "email": "smirnov@gmail.com",
+      "password_hash": "$2a$10$PlaZ4mgNdATucghM2nuYz.dRoe/1l7NJXsqDS3QgrDOO4ZLWC68sK"
+    },
+    "start_time": null,
+    "end_time": null
+  },
+  {
+    "id": 2,
+    "duration": 0,
+    "task": {
+      "id": 2,
+      "title": "Fixing bags M-Banking",
+      "description": "Fix bags in payment module",
+      "project": {
+        "id": 3,
+        "name": "Banking Application",
+        "description": "M-Banking for Belgazprombank"
+      }
+    },
+    "employee": {
+      "id": 3,
+      "username": "antonchik",
+      "email": "antonov@gmail.com",
+      "password_hash": "$2a$10$tVNMlelB.2Xd.A.lzZR5hOg6VZ9BrxPS4sk0hbLFKFbpbStoKIPYS"
+    },
+    "start_time": null,
+    "end_time": null
+  },
+  {
+    "id": 3,
+    "duration": 0,
+    "task": {
+      "id": 3,
+      "title": "Add new feature",
+      "description": "Add new feature for shows menu",
+      "project": {
+        "id": 2,
+        "name": "Restaurant Application",
+        "description": "Restaurant Management Application"
+      }
+    },
+    "employee": {
+      "id": 1,
+      "username": "petrov403",
+      "email": "petrov@gmail.com",
+      "password_hash": "$2a$10$oHVi32elkA5xTUxThOChi.4fmtNeeZVZtLZ/ZUtvrUCS1DnAfKCMi"
+    },
+    "start_time": "2024-10-29 15:30",
+    "end_time": null
+  }
+]

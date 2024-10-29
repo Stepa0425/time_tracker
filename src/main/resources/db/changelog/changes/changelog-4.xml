@@ -27,7 +27,8 @@
                                  baseColumnNames="project_id"
                                  constraintName="fk_tasks_project_id"
                                  referencedTableName="projects"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id"
+                                 onDelete="CASCADE"/>
     </changeSet>
 
 </databaseChangeLog>

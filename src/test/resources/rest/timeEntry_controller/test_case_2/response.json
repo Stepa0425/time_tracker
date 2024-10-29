@@ -1,0 +1,20 @@
+{
+  "id": 4,
+  "duration": 0,
+  "task": {"id": 3,
+    "title": "Add new feature",
+    "description": "Add new feature for shows menu",
+    "project": {
+      "id": 2,
+      "name": "Restaurant Application",
+      "description": "Restaurant Management Application"
+    }},
+  "employee": {
+    "id": 2,
+    "username": "smirnyaga",
+    "email": "smirnov@gmail.com",
+    "password_hash": "$2a$10$PlaZ4mgNdATucghM2nuYz.dRoe/1l7NJXsqDS3QgrDOO4ZLWC68sK"
+  },
+  "start_time": null,
+  "end_time": null
+}

@@ -130,8 +130,7 @@ public class TaskServiceImplTest {
     }
 
     @Test
-    public void shouldReturnExceptionWhenTryDeleteNotExistsTask(){
-        when(taskRepository.findById(1L)).thenReturn(Optional.empty());
+    public void shouldReturnExceptionWhenDeleteNotExistsTask(){
 
         ResourceNotFoundException exception = assertThrows(ResourceNotFoundException.class,
                 () -> taskService.deleteTask(1L));

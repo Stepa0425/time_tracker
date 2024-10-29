@@ -1,0 +1,21 @@
+{
+  "duration": 10,
+  "task": {
+    "id": 2,
+    "title": "Fixing bags M-Banking",
+    "description": "Fix bags in payment module",
+    "project": {
+      "id": 3,
+      "name": "Banking Application",
+      "description": "M-Banking for Belgazprombank"
+    }
+  },
+  "employee": {
+    "id": 3,
+    "username": "antonchik",
+    "email": "antonov@gmail.com",
+    "password_hash": "$2a$10$tVNMlelB.2Xd.A.lzZR5hOg6VZ9BrxPS4sk0hbLFKFbpbStoKIPYS"
+  },
+  "start_time": null,
+  "end_time": null
+}

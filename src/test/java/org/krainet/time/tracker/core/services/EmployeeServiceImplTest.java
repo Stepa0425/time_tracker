@@ -44,7 +44,7 @@ public class EmployeeServiceImplTest {
         var employee = mock(Employee.class);
         when(employee.getUsername()).thenReturn("Martin");
         when(employee.getEmail()).thenReturn("martinov@gmail.com");
-        when(employeeRepository.save(employee)).thenReturn(new Employee(1L, "Martin", "martinov@gmail.com", "somehash"));
+        when(employeeRepository.save(employee)).thenReturn(employee);
 
         Employee savedEmployee = employeeService.createEmployee(employee);
         assertEquals(savedEmployee.getUsername(), employee.getUsername());
@@ -55,7 +55,7 @@ public class EmployeeServiceImplTest {
     public void shouldReturnExceptionWhenCreateEmployeeWithEmailExists() {
         var employee = mock(Employee.class);
         when(employee.getEmail()).thenReturn("martinov@gmail.com");
-        when(employeeRepository.findByEmail(employee.getEmail())).thenReturn(Optional.of(new Employee(1L, "Martin", "martinov@gmail.com", "somehash")));
+        when(employeeRepository.findByEmail(employee.getEmail())).thenReturn(Optional.of(employee));
 
         EmployeeAlreadyExistsException exception = assertThrows(EmployeeAlreadyExistsException.class,
                 () -> employeeService.createEmployee(employee));
@@ -94,8 +94,8 @@ public class EmployeeServiceImplTest {
     @Test
     public void shouldThrowExceptionWhenUpdatingEmployeeWithExistingEmail() {
         Long employeeId = 1L;
-        var existingEmployee = new Employee(employeeId, "Martin", "martinov@gmail.com", "somehash");
-        var updatedEmployee = new Employee(null, "Martin", "martinov@gmail.com", "newhash");
+        var existingEmployee = mock(Employee.class);
+        var updatedEmployee = mock(Employee.class);
 
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(existingEmployee));
         when(employeeRepository.findByEmail(updatedEmployee.getEmail())).thenReturn(Optional.of(existingEmployee));
