@@ -16,7 +16,8 @@
       "id": 2,
       "username": "smirnyaga",
       "email": "smirnov@gmail.com",
-      "password_hash": "$2a$10$PlaZ4mgNdATucghM2nuYz.dRoe/1l7NJXsqDS3QgrDOO4ZLWC68sK"
+      "password_hash": "$2a$10$PlaZ4mgNdATucghM2nuYz.dRoe/1l7NJXsqDS3QgrDOO4ZLWC68sK",
+      "role": "USER"
     },
     "start_time": null,
     "end_time": null
@@ -38,7 +39,8 @@
       "id": 3,
       "username": "antonchik",
       "email": "antonov@gmail.com",
-      "password_hash": "$2a$10$tVNMlelB.2Xd.A.lzZR5hOg6VZ9BrxPS4sk0hbLFKFbpbStoKIPYS"
+      "password_hash": "$2a$10$tVNMlelB.2Xd.A.lzZR5hOg6VZ9BrxPS4sk0hbLFKFbpbStoKIPYS",
+      "role": "USER"
     },
     "start_time": null,
     "end_time": null
@@ -60,7 +62,8 @@
       "id": 1,
       "username": "petrov403",
       "email": "petrov@gmail.com",
-      "password_hash": "$2a$10$oHVi32elkA5xTUxThOChi.4fmtNeeZVZtLZ/ZUtvrUCS1DnAfKCMi"
+      "password_hash": "$2a$10$oHVi32elkA5xTUxThOChi.4fmtNeeZVZtLZ/ZUtvrUCS1DnAfKCMi",
+      "role": "USER"
     },
     "start_time": "2024-10-29 15:30",
     "end_time": null

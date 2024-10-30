@@ -1,5 +1,6 @@
 {
   "username": "sidor",
   "email": "sidorov@gmail.com",
-  "password_hash": "$2a$10$oHVi32elkA5xTUxThOChi.4fmtNeeZVZtLZ/ZUtvrUCS1DnAfKCMi"
+  "password_hash": "$2a$10$oHVi32elkA5xTUxThOChi.4fmtNeeZVZtLZ/ZUtvrUCS1DnAfKCMi",
+  "role": "USER"
 }

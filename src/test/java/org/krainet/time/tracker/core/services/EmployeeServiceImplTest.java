@@ -44,11 +44,23 @@ public class EmployeeServiceImplTest {
         var employee = mock(Employee.class);
         when(employee.getUsername()).thenReturn("Martin");
         when(employee.getEmail()).thenReturn("martinov@gmail.com");
+        when(employee.getRole()).thenReturn(Employee.Role.USER);
         when(employeeRepository.save(employee)).thenReturn(employee);
 
         Employee savedEmployee = employeeService.createEmployee(employee);
         assertEquals(savedEmployee.getUsername(), employee.getUsername());
         assertEquals(savedEmployee.getEmail(), employee.getEmail());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenCreatingEmployeeWithInvalidRole() {
+        var employee = mock(Employee.class);
+
+        when(employee.getRole()).thenReturn(null);
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> employeeService.createEmployee(employee));
+
+        assertEquals("Invalid role: null", exception.getMessage());
     }
 
     @Test
@@ -67,10 +79,13 @@ public class EmployeeServiceImplTest {
         var changedEmployee = mock(Employee.class);
         when(changedEmployee.getUsername()).thenReturn("Martin");
         when(changedEmployee.getEmail()).thenReturn("martinov@gmail.com");
+        when(changedEmployee.getRole()).thenReturn(Employee.Role.USER);
 
         var foundEmployee = mock(Employee.class);
         when(foundEmployee.getUsername()).thenReturn("Martin1024");
         when(foundEmployee.getEmail()).thenReturn("martinov1024@gmail.com");
+        when(foundEmployee.getRole()).thenReturn(Employee.Role.USER);
+
 
         when(employeeRepository.findById(1L)).thenReturn(Optional.of(foundEmployee));
         when(employeeRepository.save(foundEmployee)).thenReturn(changedEmployee);
@@ -78,6 +93,7 @@ public class EmployeeServiceImplTest {
         Employee updateEmployee = employeeService.updateEmployee(1L, foundEmployee);
         assertEquals(updateEmployee.getUsername(), changedEmployee.getUsername());
         assertEquals(updateEmployee.getEmail(), changedEmployee.getEmail());
+        assertEquals(updateEmployee.getRole(), changedEmployee.getRole());
     }
 
     @Test
@@ -104,6 +120,21 @@ public class EmployeeServiceImplTest {
                 () -> employeeService.updateEmployee(employeeId, updatedEmployee));
 
         assertEquals("Employee with email: " + updatedEmployee.getEmail() + " already exists. Please change the email.", exception.getMessage());
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenUpdatingEmployeeWithInvalidRole() {
+        Long employeeId = 1L;
+        var existingEmployee = mock(Employee.class);
+        var updatedEmployee = mock(Employee.class);
+
+        when(updatedEmployee.getRole()).thenReturn(null);
+        when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(existingEmployee));
+
+        IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+                () -> employeeService.updateEmployee(employeeId, updatedEmployee));
+
+        assertEquals("Invalid role: null", exception.getMessage());
     }
 
     @Test

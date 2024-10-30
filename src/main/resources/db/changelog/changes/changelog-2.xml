@@ -19,6 +19,9 @@
             <column name="password_hash" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="role" type="VARCHAR(10)" defaultValue="USER">
+                <constraints nullable="false" checkConstraint="role IN ('USER', 'ADMIN')"/>
+            </column>
         </createTable>
     </changeSet>
 

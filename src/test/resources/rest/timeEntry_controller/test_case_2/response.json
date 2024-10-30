@@ -13,7 +13,8 @@
     "id": 2,
     "username": "smirnyaga",
     "email": "smirnov@gmail.com",
-    "password_hash": "$2a$10$PlaZ4mgNdATucghM2nuYz.dRoe/1l7NJXsqDS3QgrDOO4ZLWC68sK"
+    "password_hash": "$2a$10$PlaZ4mgNdATucghM2nuYz.dRoe/1l7NJXsqDS3QgrDOO4ZLWC68sK",
+    "role": "USER"
   },
   "start_time": null,
   "end_time": null

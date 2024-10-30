@@ -15,7 +15,8 @@
     "id": 3,
     "username": "antonchik",
     "email": "antonov@gmail.com",
-    "password_hash": "$2a$10$tVNMlelB.2Xd.A.lzZR5hOg6VZ9BrxPS4sk0hbLFKFbpbStoKIPYS"
+    "password_hash": "$2a$10$tVNMlelB.2Xd.A.lzZR5hOg6VZ9BrxPS4sk0hbLFKFbpbStoKIPYS",
+    "role": "USER"
   },
   "start_time": null,
   "end_time": null

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.mindrot.jbcrypt.BCrypt;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -27,6 +28,10 @@ class EmployeeServiceImpl implements EmployeeService{
     @Override
     public Employee createEmployee(Employee employee) {
         findEmployeeWithEmail(employee.getEmail());
+
+        if (employee.getRole() == null || !isValidRole(employee.getRole())) {
+            throw new IllegalArgumentException("Invalid role: " + employee.getRole());
+        }
         employee.setPasswordHash(hashPassword(employee.getPasswordHash()));
         return employeeRepository.save(employee);
     }
@@ -49,10 +54,17 @@ class EmployeeServiceImpl implements EmployeeService{
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Employee isn't exists with id:" + employeeId));
 
+
         findEmployeeWithEmail(employee.getEmail());
+
+        if (employee.getRole() == null || !isValidRole(employee.getRole())) {
+            throw new IllegalArgumentException("Invalid role: " + employee.getRole());
+        }
+
         findEmployee.setPasswordHash(hashPassword(employee.getPasswordHash()));
         findEmployee.setUsername(employee.getUsername());
         findEmployee.setEmail((employee.getEmail()));
+        findEmployee.setRole(employee.getRole());
 
         return employeeRepository.save(findEmployee);
 
@@ -65,5 +77,10 @@ class EmployeeServiceImpl implements EmployeeService{
                         new ResourceNotFoundException("Employee isn't exists with id:" + employeeId));
 
         employeeRepository.deleteById(employeeId);
+    }
+
+    private boolean isValidRole(Employee.Role role) {
+        return role != null && Arrays.stream(Employee.Role.values())
+                .anyMatch(validRole -> validRole.equals(role));
     }
 }
